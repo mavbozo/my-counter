@@ -2,40 +2,39 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>My Counter</title>
-    </head>
-    <body>
-        <h1>My Counter</h1>
-        <form>
-            <label for="counter">Counter:</label><br>
-            <input type="text" id="counter" value="0"><br>
-            <button type="button" onclick="incrementCounter()">Increment</button>
-          </form> 
-          
-          <script>
-            function incrementCounter() {
-  // Get the current value of the counter input field
-  var counter = document.getElementById('counter');
-  var value = parseInt(counter.value);
+  <head>
+    <title>My Counter</title>
+  </head>
+  <body>
+    <h1>My Counter</h1>
+    <form>
+      <label for="counter">Counter:</label><br />
+      <input type="text" id="counter" value="0" /><br />
+      <button type="button" onclick="incrementCounter()">Increment</button>
+    </form>
 
-  // Make a POST request to the /increment endpoint
-  fetch('./netlify/functions/increment', {
-    method: 'POST',
-    body: JSON.stringify({ value: value }),
-  }).then(function(response) {
-    return response.json();
-  }).then(function(data) {
-    // Update the value of the counter input field with the new value
-    counter.value = data.value;
-  }).catch(function(error) {
-    console.error('Error:', error);
-  });
-}
+    <script>
+      function incrementCounter() {
+        // Get the current value of the counter input field
+        var counter = document.getElementById("counter");
+        var value = parseInt(counter.value);
 
-
-    
-          </script>
-          
-    </body>
+        // Make a POST request to the /increment endpoint
+        fetch(".netlify/functions/increment", {
+          method: "POST",
+          body: JSON.stringify({ value: value }),
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            // Update the value of the counter input field with the new value
+            counter.value = data.value;
+          })
+          .catch(function (error) {
+            console.error("Error:", error);
+          });
+      }
+    </script>
+  </body>
 </html>
