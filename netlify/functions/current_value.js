@@ -12,15 +12,13 @@ exports.handler = async function (event, context) {
   const connection = await connectToDb();
   console.log("Connected to PlanetScale!");
 
-  const body = JSON.parse(event.body);
-  var value = body.value;
-  value = value + 1;
-  // mysql2 update counter value here where id = 1
-  await connection.execute("UPDATE counter SET value = ? where id=1", [value]);
-  // await connection.query("UPDATE counter SET value = ? where id=1", [value]);
+  // get value from counter table where id = 1
+  const [rows, fields] = await connection.query(
+    "SELECT value FROM counter where id=1"
+  );
 
   return {
     statusCode: 200,
-    body: JSON.stringify({ value: value }),
+    body: JSON.stringify({ value: rows[0].value }),
   };
 };

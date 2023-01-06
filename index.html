@@ -4,8 +4,26 @@
 <html>
   <head>
     <title>My Counter</title>
+    <!-- include the widget -->
+    <script
+      type="text/javascript"
+      src="https://identity.netlify.com/v1/netlify-identity-widget.js"
+    ></script>
   </head>
   <body>
+    <div>
+      <!-- Add a menu:
+   Log in / Sign up - when the user is not logged in
+   Username / Log out - when the user is logged in
+  -->
+      <div data-netlify-identity-menu></div>
+
+      <!-- Add a simpler button:
+    Simple button that will open the modal.
+  -->
+      <div data-netlify-identity-button>Login with Netlify Identity</div>
+    </div>
+
     <h1>My Counter</h1>
     <form>
       <label for="counter">Counter:</label><br />
@@ -14,6 +32,24 @@
     </form>
 
     <script>
+      //function to get the counter value from url .netlify/functions/current_value
+      //and set the value of the counter input field
+      function getCounterValue() {
+        fetch(".netlify/functions/current_value")
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            var counter = document.getElementById("counter");
+            counter.value = data.value;
+          })
+          .catch(function (error) {
+            console.error("Error:", error);
+          });
+      }
+
+      getCounterValue();
+
       function incrementCounter() {
         // Get the current value of the counter input field
         var counter = document.getElementById("counter");

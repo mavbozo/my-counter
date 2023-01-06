@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/mavbozo/my-counter/issues"
   },
-  "homepage": "https://github.com/mavbozo/my-counter#readme"
+  "homepage": "https://github.com/mavbozo/my-counter#readme",
+  "dependencies": {
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3"
+  }
 }
