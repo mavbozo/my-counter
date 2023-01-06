@@ -7,6 +7,7 @@ async function connectToDb() {
 
 exports.handler = async function (event, context) {
   console.log("identity login");
+  console.log(context);
   const connection = await connectToDb();
   const body = JSON.parse(event.body);
   const user = body.user;
